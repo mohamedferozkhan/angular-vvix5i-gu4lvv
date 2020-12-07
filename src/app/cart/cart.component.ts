@@ -1,8 +1,7 @@
-import { Router } from "@angular/router";
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { CartService } from "../cart.service";
-
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-cart",
@@ -10,7 +9,7 @@ import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
   styleUrls: ["./cart.component.css"]
 })
 export class CartComponent implements OnInit {
-  items;
+  items: [];
   constructor(
     private cartService: CartService,
     private router: Router,
@@ -19,6 +18,12 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     // this.items = this.cartService.getItems();
+    this.items = this.storage.get("myCart");
+  }
+
+  removeItem(productNumber) {
+    this.items.splice(productNumber, 1);
+    this.storage.set("myCart", this.items);
     this.items = this.storage.get("myCart");
   }
 
