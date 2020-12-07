@@ -1,0 +1,14 @@
+<p>
+  shipping works!
+</p>
+
+<h3>Shipping Page</h3>
+
+<div *ngFor="let shipping of shippingCosts | async">
+  <span>
+    Type: {{ shipping.type }}
+  </span>
+  <span>
+    Prices : {{ shipping.price }}
+  </span>
+</div>
